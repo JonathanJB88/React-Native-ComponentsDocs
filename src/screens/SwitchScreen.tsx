@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 import { CustomSwitch } from '../components/CustomSwitch';
 import { HeaderTitle } from '../components/HeaderTitle';
+import { ThemeContext } from '../context/theme/ThemeContext';
 
 export const SwitchScreen = () => {
   const [state, setState] = useState({
@@ -11,6 +12,10 @@ export const SwitchScreen = () => {
   });
 
   const { isActive, isHappy, isHungry } = state;
+
+  const {
+    theme: { colors },
+  } = useContext(ThemeContext);
 
   const onChange = (value: boolean, field: keyof typeof state) => {
     setState({
@@ -23,7 +28,9 @@ export const SwitchScreen = () => {
     <View style={{ ...styles.container }}>
       <HeaderTitle title="Switches" />
       <View style={styles.switchRow}>
-        <Text style={styles.switchText}>Is Active</Text>
+        <Text style={{ ...styles.switchText, color: colors.text }}>
+          Is Active
+        </Text>
 
         <CustomSwitch
           isOn={isActive}
@@ -32,7 +39,9 @@ export const SwitchScreen = () => {
       </View>
 
       <View style={styles.switchRow}>
-        <Text style={styles.switchText}>Is Hungry</Text>
+        <Text style={{ ...styles.switchText, color: colors.text }}>
+          Is Hungry
+        </Text>
 
         <CustomSwitch
           isOn={isHungry}
@@ -41,7 +50,9 @@ export const SwitchScreen = () => {
       </View>
 
       <View style={styles.switchRow}>
-        <Text style={styles.switchText}>Is Happy</Text>
+        <Text style={{ ...styles.switchText, color: colors.text }}>
+          Is Happy
+        </Text>
 
         <CustomSwitch
           isOn={isHappy}
@@ -49,7 +60,9 @@ export const SwitchScreen = () => {
         />
       </View>
 
-      <Text style={styles.switchText}>{JSON.stringify(state, null, 5)}</Text>
+      <Text style={{ ...styles.switchText, color: colors.text }}>
+        {JSON.stringify(state, null, 5)}
+      </Text>
     </View>
   );
 };

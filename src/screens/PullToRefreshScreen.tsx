@@ -1,11 +1,16 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { RefreshControl, ScrollView, View } from 'react-native';
 import { HeaderTitle } from '../components/HeaderTitle';
 import { styles } from '../theme/appTheme';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { ThemeContext } from '../context/theme/ThemeContext';
 
 export const PullToRefreshScreen = () => {
   const { top } = useSafeAreaInsets();
+
+  const {
+    theme: { colors, dividerColor, dark },
+  } = useContext(ThemeContext);
 
   const [refreshing, setRefreshing] = useState(false);
 
@@ -22,18 +27,20 @@ export const PullToRefreshScreen = () => {
 
   return (
     <ScrollView
-      style={{ marginTop: refreshing ? top : 0 }}
+      style={{
+        marginTop: refreshing ? top : 0,
+      }}
       refreshControl={
         <RefreshControl
           refreshing={refreshing}
           onRefresh={onRefresh}
           progressViewOffset={10}
-          progressBackgroundColor="#5856D6"
-          colors={['white', 'red', 'orange']}
+          progressBackgroundColor={colors.background}
+          colors={[dividerColor]}
           style={{ backgroundColor: 'white' }}
-          tintColor="#5856D6"
+          tintColor={colors.background}
           title="Refreshing"
-          titleColor="#5856D6"
+          titleColor={dark ? 'white' : 'black'}
         />
       }>
       <View style={styles.globalMargin}>
