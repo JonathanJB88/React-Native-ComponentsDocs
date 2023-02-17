@@ -52,7 +52,7 @@ export const SlidesScreen = ({ navigation }: Props) => {
   const { fadeIn, opacity } = useAnimation();
 
   const {
-    theme: { colors, dividerColor, dark },
+    theme: { colors, dark },
   } = useContext(ThemeContext);
 
   const renderItem = (item: Slide) => {
